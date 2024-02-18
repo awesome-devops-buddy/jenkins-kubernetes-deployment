@@ -12,9 +12,10 @@ pipeline {
     }
     stage('Build image') {
       steps{
+        catchError(buildResult: 'SUCCESS'){
         script {
           dockerImage = docker.build dockerimagename
-        }
+        }}
       }
     }
     stage('Pushing Image') {
